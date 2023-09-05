@@ -13,6 +13,14 @@ function generateRandomPassword(length) {
   // Визначаємо випадковий індекс символу зі списку characters та округляємо до найбільшого цілого, яке менше.
   // Отримуємо символ з випадковим індексом.
   // Додаємо отриманий випадковий символ до паролю.
+  let string = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (let i = 0; i < length; i++){
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    const randomCharacter = characters[randomIndex];
+    string += randomCharacter;
+  }
+  return string;
 }
 
 console.log("Завдання: 1 ==============================");
@@ -32,6 +40,8 @@ function calculateCircleArea(radius) {
   // Повертаємо null, щоб показати, що обчислення не можливе.
   // Обчислення площі кола за формулою PI * r^2, де PI - число Пі, а r - радіус.
   // Повертаємо обчислену площу кола.
+  if (typeof radius !== 'number') return console.log('error');
+  return Math.PI * Math.pow(radius, 2)
 }
 
 console.log("Завдання 2 ==============================");
@@ -52,6 +62,14 @@ function findMinMax(numbers) {
   // Записуємо мінімальне значення масиву в змінну mix
   // Записуємо максимальне значення масиву в змінну max
   // Повертаємо об'єкт {min,max}, що містить знайдені мінімальне та максимальне число.
+  if (!Array.isArray(numbers)) {
+    console.log("error");
+    return null;
+  } else {
+    let max = Math.max(...numbers);
+    let min = Math.min(...numbers);
+    return { 'min': min, 'max': max};
+  }
 }
 
 console.log("Завдання 3 ==============================");
@@ -72,6 +90,12 @@ function calculateHypotenuse(a, b) {
   // Повертаємо null, що свідчить про неможливість обробки вхідних даних.
   // Обчислюємо довжину гіпотенузи за теоремою Піфагора. c=√(a² + b²)
   // Повертаємо обчислену довжину гіпотенузи.
+  if (typeof a !== 'number' || typeof b !== 'number') {
+    console.log("error");
+    return null;
+  }
+  let c = Math.sqrt(Math.pow(a, 2) + Math.pow(b,2));
+  return c;
 }
 
 console.log("Завдання 4 ==============================");
@@ -97,6 +121,23 @@ function roundObjectValues(obj) {
   // Якщо значення не є числом, повертаємо оригінальну пару [ключ, значення].
   // Конвертуємо масив пар [ключ, значення] назад в об'єкт за допомогою Object.fromEntries().
   // Повертаємо новий об'єкт з заокругленими значеннями числових властивостей.
+  if (!typeof obj === 'object' || obj === null) {
+    console.log("Помилка: аргумент має бути об'єктом");
+    return null;
+  }
+  const roundedObject = {};
+
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const value = obj[key];
+      if (typeof value === 'number') {
+        roundedObject[key] = Math.round(value);
+      } else {
+        roundedObject[key] = value;
+      }
+    }
+  }
+  return roundedObject;
 }
 
 console.log("Завдання 5 ==============================");
@@ -124,6 +165,12 @@ function calculateVolumeCylinder(radius, height) {
   // Обчислюємо об'єм циліндра за формулою V = PI * r^2 * h, де PI - число Пі, r - радіус, h - висота.
   // Округляємо об'єму до найменшого цілого числа числа що більше.
   // Повертаємо обчислений об'єм.
+    if (typeof radius !== 'number' || typeof height !== 'number') {
+    console.log("error");
+    return null;
+  }
+  let vol = Math.PI * Math.pow(radius, 2) * height;
+  return Math.ceil(vol);
 }
 
 console.log("Завдання 6 ==============================");
@@ -145,6 +192,16 @@ function sumPositiveNumbers(numbers) {
   // Перевіряємо, чи є поточне число додатним, використовуючи Math.sign.
   // Якщо число додатнє, додаємо його до суми.
   // Повертаємо суму додатніх чисел.
+  if (!Array.isArray(numbers)) {
+    console.log('Помилка: аргумент має бути масивом чисел');
+    return null;
+  }
+  let sum = 0;
+  for (const i of numbers) {
+    if (Math.sign(i) === 1)
+      sum += i;
+  }
+  return sum;
 }
 
 console.log("Завдання 7 ==============================");
@@ -164,6 +221,13 @@ function getFractionalPart(num) {
   // Віднімаємо цілу частину від початкового числа, щоб отримати дробову частину.
   // Округлюємо дробову частину з формату double до float.
   // Повертаємо дробову частину числа.
+      if (typeof num !== 'number') {
+    console.log("Помилка: вхідний аргумент має бути числом.");
+    return null;
+  }
+  let a = Math.trunc(num);
+  let b = num - a;
+  return parseFloat(b);
 }
 
 console.log("Завдання 8 ==============================");
