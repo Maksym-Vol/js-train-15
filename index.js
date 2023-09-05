@@ -248,6 +248,13 @@ function compareAndRound(num1, num2) {
   // Визначаємо найбільше число.
   // Округляємо найбільше число до найближчого цілого.
   // Повертаємо округлене число.
+  if (typeof num1 !== 'number' || typeof num2 !== 'number') {
+    console.error("Помилка: обидва аргументи мають бути числами.");
+    return null;
+  }
+  const maxNumber = Math.max(num1, num2);
+  const roundedMax = Math.round(maxNumber);
+  return roundedMax;
 }
 
 console.log("Завдання 9 ==============================");
@@ -269,6 +276,13 @@ function estimateInvestment(principal, interestRate, years) {
   // Розраховуємо суму інвестицій за формулою P*(1+rate)^years, де P - початкова сума інвестицій, rate - річна процентна ставка, years - кількість років.
   // Округляємо ії до найближчого цілого
   // Повертаємо розраховану суму інвестицій.
+  if (typeof principal !== 'number' || typeof interestRate !== 'number' || typeof years !== 'number') {
+    console.error("Помилка: всі аргументи мають бути числами.");
+    return null;
+  }
+  const futureValue = principal * Math.pow(1 + interestRate, years);
+  const roundedValue = Math.round(futureValue * 100) / 100;
+  return roundedValue;
 }
 
 console.log("Завдання 10 ==============================");
@@ -297,6 +311,22 @@ function isTotalPriceExceedsMaxPrice(products, maxPrice) {
   // Додаємо ціну продукту до аккумулятора.
   // Конвертуємо totalPrice та maxPrice за допомогою Math.fround.
   // Порівнюємо, чи не перевищує totalPrice maxPrice.
+  if (!Array.isArray(products)) {
+    console.error("Помилка: аргумент 'products' має бути масивом.");
+    return null;
+  }
+  if (typeof maxPrice !== 'number') {
+    console.error("Помилка: аргумент 'maxPrice' має бути числом.");
+    return null;
+  }
+  const totalPrice = products.reduce((accumulator, product) => {
+    return accumulator + product.price;
+  }, 0);
+  const convertedTotalPrice = Math.fround(totalPrice);
+  const convertedMaxPrice = Math.fround(maxPrice);
+
+  // Порівнюємо, чи не перевищує totalPrice maxPrice.
+  return convertedTotalPrice <= convertedMaxPrice;
 }
 
 console.log("Завдання 11 ==============================");
